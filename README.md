@@ -1,18 +1,12 @@
 # Murmurations
 
-A token- and badge-gated **governance signaling** app. A community runs
-"murmurs" (signaling rounds); eligible wallets allocate points across the
-options ("directions") in a round, and every allocation is recorded as a
-wallet-signed, publicly verifiable ballot. No funds are ever custodied or
-moved — the app only collects and tallies signed opinions.
+A token-gated **governance signaling** app. A community runs
+"murmurs" (ballots); eligible wallets allocate points across the
+voting options ("directions") on a murmur, and every allocation is recorded as a
+wallet-signed, publicly verifiable vote. No funds are ever custodied or
+moved — the app only collects and tallies signed ballots.
 
 Production: <https://murmur.thedao.fund/>
-
-> The repository has historically been named `thedaolog`; the product is
-> **Murmurations**. You will still see `thedaolog` in a few load-bearing
-> places that can't be renamed without an infra migration (the Postgres
-> database name, the GHCR image names, and the deploy workflow). Those are
-> intentional — see [Naming](#naming-thedaolog-vs-murmurations).
 
 ---
 
@@ -71,7 +65,7 @@ ETHSecurity badge ERC-721s are the eligibility gate.
 This app holds no funds, but it does make **trust decisions** off signatures
 and token balances. The parts worth scrutiny:
 
-- **Signed ballots (EIP-712).** A vote is an EIP-712 `Ballot` signed by the
+- **Signed ballots (EIP-712).** A user's vote is an EIP-712 `Ballot` signed by the
   voter. The domain is `murmurations` (v1). The server recovers the signer
   and stores `{ballot, signature, signedAt}`; the public ballots endpoint
   lets anyone re-verify. See `BALLOT_TYPES` / `castVote` in
@@ -165,6 +159,4 @@ intentionally:
 - the **GHCR image names** and the **deploy workflow** (`.github/workflows/`) —
   deploy-critical, and changed only as part of a coordinated infra update.
 
-Everything user-facing and in-app already reads as Murmurations. The EIP-712
-signing domain is `murmurations`, so the branding and the cryptographic
-identity already agree.
+
